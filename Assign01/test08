@@ -1,0 +1,9 @@
+b = b'A'
+print(b)
+c = b'\x41'
+print(c)
+d = b'[65]'
+print(d)
+e = bytes([65])
+print(e)
+

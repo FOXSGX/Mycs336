@@ -1,0 +1,17 @@
+import torch
+
+token_ids = torch.tensor([
+    [0, 1, 2],
+    [2, 1, 3],
+])
+
+embedding = torch.nn.Embedding(
+    num_embeddings=4,
+    embedding_dim=5,
+)
+
+output = embedding(token_ids)
+
+print("token_ids shape:", token_ids.shape)
+print("output shape:", output.shape)
+print(output)

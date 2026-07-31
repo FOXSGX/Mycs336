@@ -1,0 +1,41 @@
+import torch
+import torch.nn.functional as F
+
+torch.manual_seed(0)
+
+batch_size = 2
+sequence_length = 3
+vocab_size = 5
+
+logits = torch.randn(
+    batch_size,
+    sequence_length,
+    vocab_size,
+    requires_grad=True,
+)
+
+targets = torch.tensor([
+    [1, 4, 2],
+    [0, 3, 1],
+])
+
+per_token_loss = F.cross_entropy(
+    logits.reshape(-1, vocab_size),
+    targets.reshape(-1),
+    reduction="none",
+)
+
+per_token_loss = per_token_loss.reshape(
+    batch_size,
+    sequence_length,
+)
+
+loss = per_token_loss.mean()
+loss.backward()
+
+print("logits shape:", logits.shape)
+print("targets shape:", targets.shape)
+print("per-token loss:")
+print(per_token_loss)
+print("mean loss:", loss)
+print("gradient shape:", logits.grad.shape)

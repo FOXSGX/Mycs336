@@ -1,0 +1,9 @@
+import torch
+
+scores = torch.tensor([2.0, 1.0, 0.0])
+probabilities = torch.softmax(scores, dim=0)
+
+print("分数:", scores)
+print("概率:", probabilities)
+print("概率总和:", probabilities.sum())
+print("最高概率的位置:", probabilities.argmax())

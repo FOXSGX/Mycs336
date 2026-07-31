@@ -1,0 +1,13 @@
+import torch
+
+probability_a = torch.tensor(0.20)
+probability_b = torch.tensor(0.90)
+
+loss_a = -torch.log(probability_a)
+loss_b = -torch.log(probability_b)
+
+print("预测A的正确概率:", probability_a)
+print("预测A的loss:", loss_a)
+
+print("预测B的正确概率:", probability_b)
+print("预测B的loss:", loss_b)

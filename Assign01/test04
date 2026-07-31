@@ -1,0 +1,22 @@
+import torch
+
+logits = torch.tensor([2.0, 1.0, 0.0], requires_grad=True)
+target = 1
+
+probabilities = torch.softmax(logits, dim=0)
+loss = -torch.log(probabilities[target])
+
+loss.backward()
+
+print("probabilities:", probabilities)
+print("loss:", loss)
+print("gradient:", logits.grad)
+
+learning_rate = 0.1
+
+with torch.no_grad():
+    new_logits = logits - learning_rate * logits.grad
+    new_probabilities = torch.softmax(new_logits, dim=0)
+
+print("new logits:", new_logits)
+print("new probabilities:", new_probabilities)
