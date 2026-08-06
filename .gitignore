@@ -1,0 +1,5 @@
+.venv/
+.vscode/
+tmp/
+
+official_assignment1/tmp/
