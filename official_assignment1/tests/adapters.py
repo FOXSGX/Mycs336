@@ -2,6 +2,8 @@ from __future__ import annotations
 from cs336_basics.tokenizer import Tokenizer
 from cs336_basics.train_bpe import train_bpe
 from cs336_basics.model import Linear
+from cs336_basics.model import Embedding
+from cs336_basics.model import RMSNorm
 
 import os
 from collections.abc import Iterable
@@ -54,8 +56,10 @@ def run_embedding(
     Returns:
         Float[Tensor, "... d_model"]: Batch of embeddings returned by your Embedding layer.
     """
+    embedding = Embedding(vocab_size,d_model)
+    embedding.load_state_dict({"weight":weights})
+    return embedding(token_ids)
 
-    raise NotImplementedError
 
 
 def run_swiglu(
@@ -382,8 +386,9 @@ def run_rmsnorm(
         Float[Tensor,"... d_model"]: Tensor of with the same shape as `in_features` with the output of running
         RMSNorm of the `in_features`.
     """
-    raise NotImplementedError
-
+    rmsnorm = RMSNorm(d_model,eps)
+    rmsnorm.load_state_dict({"weight":weights})
+    return rmsnorm(in_features)
 
 def run_silu(in_features: Float[Tensor, " ..."]) -> Float[Tensor, " ..."]:
     """Given a tensor of inputs, return the output of applying SiLU
